@@ -4,6 +4,11 @@ Imports System.Windows.Forms
 
 Module Module1
 
+    Private Const WM_KEYDOWN = &H100
+    Private Const WM_KEYUP = &H101
+
+    Private Const VK_RETURN = &HD
+
     <DllImport("User32.dll")>
     Private Function FindWindow(lpClassName As String, lpWindowName As String) As IntPtr
 
@@ -11,6 +16,11 @@ Module Module1
 
     <DllImport("User32.dll")>
     Private Function SetForegroundWindow(hWnd As IntPtr) As Boolean
+
+    End Function
+
+    <DllImport("User32.dll")>
+    Private Function PostMessage(hWnd As IntPtr, Msg As UInt32, wParam As Int32, lParam As Int32) As Boolean
 
     End Function
 
@@ -32,12 +42,12 @@ Module Module1
         Do
             Dim WeChatLoginWndHandle = FindWindow("WeChatLoginWndForPC", Nothing)
             If WeChatLoginWndHandle = 0 Then
-                Threading.Thread.Sleep(1000)
+                Threading.Thread.Sleep(500)
                 Continue Do
             End If
 
-            SetForegroundWindow(WeChatLoginWndHandle)
-            SendKeys.SendWait("{ENTER}")
+            PostMessage(WeChatLoginWndHandle, WM_KEYDOWN, New IntPtr(VK_RETURN), New IntPtr(0))
+            PostMessage(WeChatLoginWndHandle, WM_KEYUP, New IntPtr(VK_RETURN), New IntPtr(0))
 
             Exit Do
         Loop
