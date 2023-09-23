@@ -46,6 +46,8 @@ Module Module1
                 Continue Do
             End If
 
+            Threading.Thread.Sleep(500)
+
             PostMessage(WeChatLoginWndHandle, WM_KEYDOWN, New IntPtr(VK_RETURN), New IntPtr(0))
             PostMessage(WeChatLoginWndHandle, WM_KEYUP, New IntPtr(VK_RETURN), New IntPtr(0))
 
