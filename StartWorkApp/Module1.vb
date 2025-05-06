@@ -40,7 +40,7 @@ Module Module1
 
         ' 点击微信登录按钮
         Do
-            Dim WeChatLoginWndHandle = FindWindow("WeChatLoginWndForPC", Nothing)
+            Dim WeChatLoginWndHandle = FindWindow(Nothing, "微信")
             If WeChatLoginWndHandle = 0 Then
                 Threading.Thread.Sleep(500)
                 Continue Do
